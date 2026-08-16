@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ئاگادارییەکان و خشتەکان - ئامادەیی بەدرخانی کوڕان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(15, 30, 40, 0.75), rgba(10, 20, 30, 0.85)), url('school.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            color: white;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 15px;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 10px auto;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 6px 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #38bdf8;
+        }
+
+        .main-container {
+            max-width: 850px;
+            width: 100%;
+            margin: auto;
+            padding: 10px 0;
+        }
+
+        .glass-card {
+            background: rgba(20, 50, 65, 0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 25px 15px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #38bdf8;
+            text-align: center;
+        }
+
+        .admin-box {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .admin-box h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .checkbox-container label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #e2e8f0;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            accent-color: #38bdf8;
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        .admin-box input[type="text"], .admin-box textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 13px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .admin-box textarea {
+            resize: vertical;
+            height: 65px;
+        }
+        .add-btn {
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .notice-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-right: 4px solid #38bdf8;
+            position: relative;
+        }
+
+        .notice-tag {
+            display: inline-block;
+            background: #0ea5e9;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .notice-box h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .notice-box p {
+            font-size: 13px;
+            color: #cbd5e1;
+            word-break: break-word;
+        }
+
+        .delete-btn {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            background: rgba(239, 68, 68, 0.8);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        @media (min-width: 600px) {
+            .glass-card {
+                padding: 35px 30px;
+            }
+            .glass-card h1 {
+                font-size: 26px;
+            }
+            .add-btn {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <nav>
+        <a href="page1.html">سەرەکی</a>
+        <a href="page2.html">ئاگاداری و خشتەکان</a>
+        <a href="page3.html">خشتەی ڕۆژانە</a>
+        <a href="page4.html">نمرەکان</a>
+        <a href="index.html" onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.3); color: #f87171;">چوونە دەرەوە</a>
+    </nav>
+    </nav>
+
+    <div class="main-container">
+        <div class="glass-card">
+            <h1>ئاگاداری و خشتەی قوتابخانە</h1>
+            
+            <div class="admin-box">
+                <h3>➕ بڵاوکردنەوەی ئاگاداری نوێ</h3>
+                <p style="font-size: 11px; color: #cbd5e1; margin-bottom: 6px;">پۆلەکان دیاری بکە:</p>
+                
+                <div class="checkbox-container">
+                    <label><input type="checkbox" id="checkAll" onclick="toggleAll(this)"> <b>هەموو پۆلەکان</b></label>
+                    <label><input type="checkbox" name="targetClass" value="پۆلی 10 (زانستی)"> پۆلی 10 زانستی</label>
+                    <label><input type="checkbox" name="targetClass" value="پۆلی 10 (وێژەیی)"> پۆلی 10 وێژەیی</label>
+                    <label><input type="checkbox" name="targetClass" value="پۆلی 11 (زانستی)"> پۆلی 11 زانستی</label>
+                    <label><input type="checkbox" name="targetClass" value="پۆلی 11 (وێژەیی)"> پۆلی 11 وێژەیی</label>
+                    <label><input type="checkbox" name="targetClass" value="پۆلی 12 (زانستی)"> پۆلی 12 زانستی</label>
+                    <label><input type="checkbox" name="targetClass" value="پۆلی 12 (وێژەیی)"> پۆلی 12 وێژەیی</label>
+                </div>
+
+                <input type="text" id="noticeTitle" placeholder="ناونیشانی ئاگاداری">
+                <textarea id="noticeDesc" placeholder="دەقی ئاگادارییەکە..."></textarea>
+                <button class="add-btn" onclick="addNotice()">بڵاوکردنەوە</button>
+            </div>
+
+            <div id="noticesContainer"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>مافی پارێزراوە بۆ ئامادەیی بەدرخانی کوران</p>
+    </footer>
+    <script>
+         function logoutUser() {
+            // پاککردنەوەی زانیارییەکانی بەکارهێنەر لە memoryـی براوسەردا
+            localStorage.removeItem('currentUserRole');
+            localStorage.removeItem('studentGrade');
+            localStorage.removeItem('studentSection');
+        }
+        window.onload = function() {
+            let savedNotices = localStorage.getItem('schoolNoticesCleanResp');
+            if (savedNotices) {
+                document.getElementById('noticesContainer').innerHTML = savedNotices;
+            }
+        }
+
+        function toggleAll(master) {
+            let checkboxes = document.querySelectorAll('input[name="targetClass"]');
+            checkboxes.forEach((cb) => { cb.checked = master.checked; });
+        }
+
+        function addNotice() {
+            let title = document.getElementById('noticeTitle').value;
+            let desc = document.getElementById('noticeDesc').value;
+            let selectedClasses = [];
+            let checkboxes = document.querySelectorAll('input[name="targetClass"]:checked');
+            
+            checkboxes.forEach((cb) => { selectedClasses.push(cb.value); });
+
+            if (title.trim() === '' || desc.trim() === '') {
+                alert('تکایە خانەکان پڕ بکەرەوە!');
+                return;
+            }
+
+            if (selectedClasses.length === 0) {
+                alert('تکایە לפەکەم یەک پۆل هەڵبژێرە!');
+                return;
+            }
+
+            let targetText = "";
+            let totalCheckboxes = document.querySelectorAll('input[name="targetClass"]').length;
+            if (selectedClasses.length === totalCheckboxes) {
+                targetText = "گشتی (هەموو پۆلەکان)";
+            } else {
+                targetText = selectedClasses.join(' ، ');
+            }
+
+            let container = document.getElementById('noticesContainer');
+let newBox = document.createElement('div');
+newBox.className = 'notice-box';
+newBox.innerHTML = `
+    <span class="notice-tag">${targetText}</span>
+    <h3>${title}</h3>
+    <p>${desc}</p>
+    <button class="delete-btn" onclick="deleteNotice(this)">سڕینەوە</button>
+`;
+container.appendChild(newBox); // Don't forget to append it to the container!
+
+            container.prepend(newBox);
+            document.getElementById('noticeTitle').value = '';
+            document.getElementById('noticeDesc').value = '';
+            document.getElementById('checkAll').checked = false;
+            checkboxes.forEach((cb) => cb.checked = false);
+            saveToLocalStorage();
+        }
+
+        function deleteNotice(button) {
+            button.parentElement.remove();
+            saveToLocalStorage();
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('schoolNoticesCleanResp', document.getElementById('noticesContainer').innerHTML);
+        }
+    </script>
+   <script>
+        window.onload = function() {
+            let savedNotices = localStorage.getItem('schoolNoticesUnified');
+            if (savedNotices) {
+                document.getElementById('noticesContainer').innerHTML = savedNotices;
+            }
+
+           let role = localStorage.getItem('currentUserRole');
+
+// Added '||' between the conditions
+if (role === 'student' || role === 'teacher' || !role) {
+    let adminBoxes = document.querySelectorAll('.admin-box');
+    adminBoxes.forEach(box => box.style.display = 'none');
+
+    let deleteButtons = document.querySelectorAll('.delete-btn');
+    deleteButtons.forEach(btn => btn.style.display = 'none');
+}
+        }
+
+        function toggleAll(master) {
+            let checkboxes = document.querySelectorAll('input[name="targetClass"]');
+            checkboxes.forEach((cb) => { cb.checked = master.checked; });
+        }
+
+        function addNotice() {
+            let title = document.getElementById('noticeTitle').value;
+            let desc = document.getElementById('noticeDesc').value;
+            let selectedClasses = [];
+            let checkboxes = document.querySelectorAll('input[name="targetClass"]:checked');
+            
+            checkboxes.forEach((cb) => { selectedClasses.push(cb.value); });
+
+            if (title.trim() === '' || desc.trim() === '') {
+                alert('تکایە خانەکان پڕ بکەرەوە!');
+                return;
+            }
+
+            if (selectedClasses.length === 0) {
+                alert('تکایە لانیکەم یەک پۆل هەڵبژێرە!');
+                return;
+            }
+
+            let targetText = "";
+            let totalCheckboxes = document.querySelectorAll('input[name="targetClass"]').length;
+            if (selectedClasses.length === totalCheckboxes) {
+                targetText = "گشتی (هەموو پۆلەکان)";
+            } else {
+                targetText = selectedClasses.join(' ، ');
+            }
+
+            let container = document.getElementById('noticesContainer');
+let newBox = document.createElement('div');
+newBox.className = 'notice-box';
+newBox.innerHTML = `
+    <span class="notice-tag">${targetText}</span>
+    <h3>${title}</h3>
+    <p>${desc}</p>
+    <button class="delete-btn" onclick="deleteNotice(this)">سڕینەوە</button>
+`;
+container.appendChild(newBox); // Don't forget to append it to the container!
+
+            container.prepend(newBox);
+            document.getElementById('noticeTitle').value = '';
+            document.getElementById('noticeDesc').value = '';
+            document.getElementById('checkAll').checked = false;
+            checkboxes.forEach((cb) => cb.checked = false);
+            saveToLocalStorage();
+        }
+
+        function deleteNotice(button) {
+            button.parentElement.remove();
+            saveToLocalStorage();
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('schoolNoticesUnified', document.getElementById('noticesContainer').innerHTML);
+        }
+    </script>
+</body>
+</html>

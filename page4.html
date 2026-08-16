@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تۆمارکردنی نمرەکان و ئەنجام - ئامادەیی بەدرخانی کوڕان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(15, 30, 40, 0.75), rgba(10, 20, 30, 0.85)), url('school.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            color: white;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 15px;
+            border-radius: 16px;
+            max-width: 700px;
+            margin: 10px auto;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 6px 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #38bdf8;
+        }
+
+        .main-container {
+            max-width: 950px;
+            width: 100%;
+            margin: auto;
+            padding: 10px 0;
+        }
+
+        .glass-card {
+            background: rgba(20, 50, 65, 0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 25px 15px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .glass-card h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #38bdf8;
+            text-align: center;
+        }
+
+        .admin-box {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .admin-box h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .admin-box input, .admin-box select {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .admin-box select option {
+            background: #0f172a;
+            color: white;
+        }
+
+        .admin-box input::placeholder {
+            color: #cbd5e1;
+        }
+
+        .add-btn {
+            background: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .add-btn:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        .result-card {
+            background: rgba(14, 165, 233, 0.15);
+            border: 1px solid rgba(14, 165, 233, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .result-card h3 {
+            color: #38bdf8;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .result-card p {
+            font-size: 15px;
+            margin: 5px 0;
+        }
+
+        .grades-table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(14, 165, 233, 0.3);
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        td {
+            color: #e2e8f0;
+        }
+
+        .total-grade {
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        .delete-btn {
+            background: rgba(239, 68, 68, 0.8);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        @media (min-width: 600px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .glass-card {
+                padding: 35px 30px;
+            }
+            .glass-card h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="page1.html">سەرەکی</a>
+        <a href="page2.html">ئاگاداری و خشتەکان</a>
+        <a href="page3.html">خشتەی ڕۆژانە</a>
+        <a href="page4.html" class="active">نمرەکان</a>
+        <a href="index.html" onclick="logoutUser()" style="background: rgba(239, 68, 68, 0.3); color: #f87171;">چوونە دەرەوە</a>
+    </nav>
+
+    <div class="main-container">
+        
+        <!-- بەشی ئەنجام و مەعەدەل (بۆ قوتابی دەردەکەوێت) -->
+        <div class="glass-card result-card" id="studentResultCard" style="display: none;">
+            <h3>📊 ئەنجامی کۆتایی و مەعەدەل</h3>
+            <p id="avgText">مەعەدەل: ---</p>
+            <p id="statusText">دۆخ: ---</p>
+        </div>
+
+        <div class="glass-card">
+            <h1>تۆمارکردنی نمرەکان (40 ڕۆژانە + 60 وەرزی)</h1>
+            
+            <!-- بەشی زیادکردنی نمرە -->
+            <div class="admin-box" id="adminGradeBox">
+                <h3>➕ تۆمارکردنی نمرەی نوێ</h3>
+                <div class="form-grid">
+                    <input type="text" id="studentName" placeholder="ناوی قوتابی (بۆ نموونە: ئارام ئەحمەد)">
+                    
+                    <select id="gradeSelect">
+                        <option value="پۆلی 10 (زانستی)">پۆلی 10 زانستی</option>
+                        <option value="پۆلی 10 (وێژەیی)">پۆلی 10 وێژەیی</option>
+                        <option value="پۆلی 11 (زانستی)">پۆلی 11 زانستی</option>
+                        <option value="پۆلی 11 (وێژەیی)">پۆلی 11 وێژەیی</option>
+                        <option value="پۆلی 12 (زانستی)">پۆلی 12 زانستی</option>
+                        <option value="پۆلی 12 (وێژەیی)">پۆلی 12 وێژەیی</option>
+                    </select>
+
+                    <select id="sectionSelect">
+                        <option value="لقی أ">لقی أ</option>
+                        <option value="لقی ب">لقی ب</option>
+                        <option value="لقی ج">لقی ج</option>
+                        <option value="لقی د">لقی د</option>
+                    </select>
+
+                    <input type="text" id="subjectName" placeholder="ناوی بابەت (بۆ نموونە: بیرکاری)">
+                    <input type="number" id="dailyMark" placeholder="نمرەی ڕۆژانە (لە 40)">
+                    <input type="number" id="examMark" placeholder="نمرەی تاقیکردنەوەی وەرزی (لە 60)">
+                </div>
+                <button class="add-btn" onclick="addGrade()">تۆمارکردن و ئەژمارکردن</button>
+            </div>
+
+            <!-- خشتەی نمرەکان -->
+            <div class="grades-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ناوی قوتابی</th>
+                            <th>پۆل و لق</th>
+                            <th>بابەت</th>
+                            <th>ڕۆژانە (40)</th>
+                            <th>وەرزی (60)</th>
+                            <th>کۆی گشتی (100)</th>
+                            <th class="action-th">کردار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gradesTableBody">
+                        <!-- نمرەکان لێرە دەردەکەون -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>مافی پارێزراوە &copy; 2026 ئامادەیی بەدرخانی کوڕان</p>
+    </footer>
+
+    <script>
+        function logoutUser() {
+            localStorage.removeItem('currentUserRole');
+            localStorage.removeItem('studentGrade');
+            localStorage.removeItem('studentSection');
+        }
+
+        window.onload = function() {
+            let savedGrades = localStorage.getItem('schoolGradesWithResult');
+            if (savedGrades) {
+                document.getElementById('gradesTableBody').innerHTML = savedGrades;
+            }
+
+            let role = localStorage.getItem('currentUserRole');
+
+            if (role === 'student') {
+                let adminBox = document.getElementById('adminGradeBox');
+                if (adminBox) adminBox.style.display = 'none';
+
+                let deleteBtns = document.querySelectorAll('.delete-td-btn');
+                deleteBtns.forEach(btn => btn.style.display = 'none');
+
+                let myGrade = localStorage.getItem('studentGrade');
+                let mySection = localStorage.getItem('studentSection');
+                
+                let rows = document.querySelectorAll('#gradesTableBody tr');
+                let visibleRowsCount = 0;
+                let totalSum = 0;
+                let failedSubjects = [];
+
+                rows.forEach(row => {
+                    if (row.cells && row.cells.length > 1) {
+                        let rowText = row.cells[1].innerText;
+                        if (rowText.includes(myGrade) && rowText.includes(mySection)) {
+                            row.style.display = '';
+                            visibleRowsCount++;
+                            
+                            let subjectName = row.cells[2].innerText;
+                            let gradeVal = parseFloat(row.cells[5].innerText) || 0;
+                            totalSum += gradeVal;
+
+                            // ئەگەر نمرەی بابەتێک لە 50 کەمتر بێت واتە کەوتووە
+                            if (gradeVal < 50) {
+                                failedSubjects.push(subjectName);
+                            }
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    }
+                });
+
+                // نیشاندانی کارتی مەعەدەل و ئەنجام بۆ قوتابی
+                if (visibleRowsCount > 0) {
+                    let average = (totalSum / visibleRowsCount).toFixed(2);
+                    let resultCard = document.getElementById('studentResultCard');
+                    resultCard.style.display = 'block';
+                    
+                    document.getElementById('avgText').innerHTML = `مەعەدەلەکەت لەسەر 100: <b>${average}</b> (کۆی گشتی: ${totalSum})`;
+
+                    let statusElement = document.getElementById('statusText');
+                    if (failedSubjects.length === 0) {
+                        statusElement.innerHTML = `دۆخ: <span style="color: #4ade80; font-weight: bold;">پیرۆزە، دەرچووی! 🎉</span>`;
+                    } else {
+                        statusElement.innerHTML = `دۆخ: <span style="color: #f87171; font-weight: bold;">دەرنەچووی، دەبێت لە خولی دووەمدا بەشداری بکەیت لەم بابەتانەدا:</span> <br><b>${failedSubjects.join(' ، ')}</b>`;
+                    }
+                }
+            }
+        }
+
+        function addGrade() {
+            let nameInput = document.getElementById('studentName');
+            let gradeSelect = document.getElementById('gradeSelect');
+            let sectionSelect = document.getElementById('sectionSelect');
+            let subjectInput = document.getElementById('subjectName');
+            let dailyInput = document.getElementById('dailyMark');
+            let examInput = document.getElementById('examMark');
+
+            // Fixed missing || operators
+            if (!nameInput || !gradeSelect || !sectionSelect || !subjectInput || !dailyInput || !examInput) {
+                alert('هەڵەیەک هەیە لە خانەکان!');
+                return;
+            }
+
+            let name = nameInput.value.trim();
+            let grade = gradeSelect.value;
+            let section = sectionSelect.value;
+            let subject = subjectInput.value.trim();
+            
+            let daily = parseFloat(dailyInput.value) || 0;
+            let exam = parseFloat(examInput.value) || 0;
+
+            if (name === '' || subject === '') {
+                alert('تکایە ناوی قوتابی و بابەت پڕ بکەرەوە!');
+                return;
+            }
+
+            let grandTotal = daily + exam;
+
+            let tbody = document.getElementById('gradesTableBody');
+            let newRow = document.createElement('tr');
+            
+            // Added backticks here
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td>${grade} - ${section}</td>
+                <td>${subject}</td>
+                <td>${daily}</td>
+                <td>${exam}</td>
+                <td class="total-grade">${grandTotal}</td>
+                <td><button class="delete-btn delete-td-btn" onclick="deleteGrade(this)">سڕینەوە</button></td>
+            `;
+
+            tbody.prepend(newRow);
+
+            nameInput.value = '';
+            subjectInput.value = '';
+            dailyInput.value = '';
+            examInput.value = '';
+
+            saveToLocalStorage();
+        }
+
+        function deleteGrade(button) {
+            let row = button.closest('tr');
+            if (row) {
+                row.remove();
+                saveToLocalStorage();
+            }
+        }
+
+        function saveToLocalStorage() {
+            let tbodyHtml = document.getElementById('gradesTableBody').innerHTML;
+            localStorage.setItem('schoolGradesWithResult', tbodyHtml);
+        }
+    </script>
+</body>
+</html>
